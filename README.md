@@ -8,13 +8,11 @@ This software acts as a connector to turn the REST based STM GTFS-RT API into ev
 
 Many reasons.
 
-1. Polling sucks. Is this 2008? REST APIs are not a good fit for GTFS-RT. By definition, these are realtime events, and should use an eventing model. Polling introduces latency between when an event occurs and when the consumer learns about it. You can reduce latency by increasing the polling frequency, but at the cost of additional network bandwidth and CPU/memory usage on both the server and client.
-2. The REST API returns the entire list of entities every time, whether they have changed or not. An eventing model allows you to only receive events when data has changed, saving network bandwidth and CPU/memory.
+1. **Polling sucks!** REST APIs are not a good fit for GTFS-RT. By definition, these are realtime events, and should use an eventing model. Polling introduces latency between when an event occurs and when the consumer learns about it. You can reduce latency by increasing the polling frequency, but at the cost of additional network bandwidth and CPU/memory usage on both the server and client.
+2. The REST API returns the **entire list of entities every time**, whether they have changed or not. An eventing model allows you to only receive events when data has changed, saving network bandwidth and CPU/memory.
 3. The Solace PubSub+ broker offers flexible filtering via [wildcards](https://docs.solace.com/PubSub-Basics/Wildcard-Charaters-Topic-Subs.htm) in  topic subscriptions. You can easily filter for routes, trips, vehicles and even geographical locations. This is not server based filtering, the broker does the heavy lifting for you.
 
 We haven't even talked about the important concepts like high-availability and fan-out, which again, the broker does for you.
-
-## Usage
 
 ### Setup
 
